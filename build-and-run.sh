@@ -1,12 +1,12 @@
 #!/bin/bash
 
+set -e  # Exit on error
+
 # Complete Build and Run Script
 # This script builds the Flutter web app and serves it
 
 echo "🚀 ServiceMaster - Complete Build and Run"
 echo ""
-
-set -e  # Exit on error
 
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
