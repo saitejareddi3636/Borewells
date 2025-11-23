@@ -563,18 +563,23 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
 
   Widget _buildStatusBadge(VehicleStatus status) {
     Color color;
+    String displayName;
     switch (status) {
       case VehicleStatus.available:
         color = Colors.green;
+        displayName = 'Available';
         break;
       case VehicleStatus.inUse:
         color = Colors.orange;
+        displayName = 'In Use';
         break;
       case VehicleStatus.maintenance:
         color = Colors.red;
+        displayName = 'Maintenance';
         break;
       case VehicleStatus.outOfService:
         color = Colors.grey;
+        displayName = 'Out of Service';
         break;
     }
     
@@ -585,7 +590,7 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        status.name.toUpperCase(),
+        displayName.toUpperCase(),
         style: const TextStyle(
           color: Colors.white,
           fontSize: 10,
