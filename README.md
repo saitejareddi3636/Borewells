@@ -2,24 +2,83 @@
 
 A Flutter web app for easy vehicle maintenance tracking. Simplified interface for non-technical users.
 
-## 🚀 Quick Setup
+## 🚀 Quick Start (Easiest Way - Using Docker)
 
-### 1. Install Flutter
-- Download Flutter SDK from [flutter.dev](https://flutter.dev/docs/get-started/install)
-- Add Flutter to your PATH
+**Prerequisites:** Docker must be installed and running
 
-### 2. Clone & Run
+### Option 1: Quick Run with Docker (Recommended)
 ```bash
-git clone <your-repo-url>
-cd servicemaster
-flutter pub get
-flutter run -d web-server --web-port=8081
+./run-quick.sh
 ```
 
-### 3. Open in Browser
+This script will:
+- Pull the Flutter Docker image (ghcr.io/cirruslabs/flutter:latest)
+- Install dependencies automatically
+- Start the application on port 8081
+
+### Option 2: Docker Compose
+```bash
+docker-compose up --build
 ```
-http://localhost:8081
+
+### Option 3: Manual Docker Command
+```bash
+docker run -d \
+  --name servicemaster-app \
+  -p 8081:8081 \
+  -v "$(pwd):/app" \
+  -w /app \
+  ghcr.io/cirruslabs/flutter:latest \
+  sh -c "flutter pub get && flutter run -d web-server --web-port=8081 --web-hostname=0.0.0.0"
 ```
+
+**Access the app at:** `http://localhost:8081`
+
+**View logs:**
+```bash
+docker logs -f servicemaster-app
+```
+
+**Stop the app:**
+```bash
+docker stop servicemaster-app
+```
+
+## 🔧 Alternative Setup (Without Docker)
+
+### Prerequisites
+- Flutter SDK 3.10.0 or higher
+- Dart SDK 3.10.0 or higher
+
+### Steps
+```bash
+# 1. Install Flutter from https://flutter.dev/docs/get-started/install
+
+# 2. Get dependencies
+flutter pub get
+
+# 3. Run the application
+flutter run -d web-server --web-port=8081
+
+# 4. Open in browser
+# http://localhost:8081
+```
+
+## 📋 Available Scripts
+
+This repository includes several convenience scripts:
+
+| Script | Description |
+|--------|-------------|
+| `./run-quick.sh` | Quick start with Docker (recommended) |
+| `./run.sh` | Build and run with docker-compose |
+| `./build-and-run.sh` | Build the app and serve with Python |
+| `./run-simple.sh` | Serve pre-built app with Python |
+| `index.html` | Information page about the application |
+
+## 🌐 Demo Page
+
+Open `index.html` in your browser to see detailed instructions and information about the application.
 
 ## 👥 Test Login
 
@@ -57,6 +116,28 @@ All dependencies are automatically installed with `flutter pub get`:
 - No complex typing required!
 
 ## 🚨 Troubleshooting
+
+### Docker Issues
+
+**App won't start?**
+```bash
+docker stop servicemaster-app
+./run-quick.sh
+```
+
+**View logs:**
+```bash
+docker logs -f servicemaster-app
+```
+
+**Port busy?**
+```bash
+# Edit the port in run-quick.sh or run manually:
+docker run -d --name servicemaster-app -p 8082:8082 -v "$(pwd):/app" -w /app \
+  cirrusci/flutter:stable sh -c "flutter pub get && flutter run -d web-server --web-port=8082 --web-hostname=0.0.0.0"
+```
+
+### Flutter Direct Issues
 
 **App won't start?**
 ```bash
