@@ -6,6 +6,37 @@ import '../services/organization_service.dart';
 import 'add_edit_vehicle_screen.dart';
 import 'vehicle_details_screen.dart';
 
+/// Extension methods for display-friendly enum names
+extension VehicleTypeDisplay on VehicleType {
+  String get displayName {
+    switch (this) {
+      case VehicleType.truck:
+        return 'Truck';
+      case VehicleType.van:
+        return 'Van';
+      case VehicleType.car:
+        return 'Car';
+      case VehicleType.motorcycle:
+        return 'Motorcycle';
+    }
+  }
+}
+
+extension VehicleStatusDisplay on VehicleStatus {
+  String get displayName {
+    switch (this) {
+      case VehicleStatus.available:
+        return 'Available';
+      case VehicleStatus.inUse:
+        return 'In Use';
+      case VehicleStatus.maintenance:
+        return 'Maintenance';
+      case VehicleStatus.outOfService:
+        return 'Out of Service';
+    }
+  }
+}
+
 /// Complex Vehicle List Screen with advanced filtering, sorting, and search
 /// 
 /// Features:
@@ -245,14 +276,14 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
           children: [
             // Type filter
             _buildFilterChip(
-              label: _filterType?.name ?? 'All Types',
+              label: _filterType?.displayName ?? 'All Types',
               onPressed: () => _showTypeFilter(),
               isActive: _filterType != null,
             ),
             const SizedBox(width: 8),
             // Status filter
             _buildFilterChip(
-              label: _filterStatus?.name ?? 'All Status',
+              label: _filterStatus?.displayName ?? 'All Status',
               onPressed: () => _showStatusFilter(),
               isActive: _filterStatus != null,
             ),
@@ -563,23 +594,18 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
 
   Widget _buildStatusBadge(VehicleStatus status) {
     Color color;
-    String displayName;
     switch (status) {
       case VehicleStatus.available:
         color = Colors.green;
-        displayName = 'Available';
         break;
       case VehicleStatus.inUse:
         color = Colors.orange;
-        displayName = 'In Use';
         break;
       case VehicleStatus.maintenance:
         color = Colors.red;
-        displayName = 'Maintenance';
         break;
       case VehicleStatus.outOfService:
         color = Colors.grey;
-        displayName = 'Out of Service';
         break;
     }
     
@@ -590,7 +616,7 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Text(
-        displayName.toUpperCase(),
+        status.displayName.toUpperCase(),
         style: const TextStyle(
           color: Colors.white,
           fontSize: 10,
@@ -699,7 +725,7 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
               },
             ),
             ...VehicleType.values.map((type) => ListTile(
-              title: Text(type.name),
+              title: Text(type.displayName),
               onTap: () {
                 setState(() {
                   _filterType = type;
@@ -733,7 +759,7 @@ class _VehicleListScreenComplexState extends State<VehicleListScreenComplex> {
               },
             ),
             ...VehicleStatus.values.map((status) => ListTile(
-              title: Text(status.name),
+              title: Text(status.displayName),
               onTap: () {
                 setState(() {
                   _filterStatus = status;
