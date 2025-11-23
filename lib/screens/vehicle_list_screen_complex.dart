@@ -7,6 +7,8 @@ import 'add_edit_vehicle_screen.dart';
 import 'vehicle_details_screen.dart';
 
 /// Extension methods for display-friendly enum names
+/// Note: VehicleModel has similar getters (typeDisplayName, statusDisplayName)
+/// These extensions are for when we have standalone enums without a vehicle object
 extension VehicleTypeDisplay on VehicleType {
   String get displayName {
     switch (this) {
