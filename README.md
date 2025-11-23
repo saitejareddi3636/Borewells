@@ -164,4 +164,23 @@ flutter run -d web-server --web-port=8082
 8. General Inspection (300 hrs/6,000 km)
 
 ---
-**Built with Flutter • Ready to use offline • No Firebase setup required**
+**Built with Flutter • Ready to use • No Firebase setup required**
+
+## 🚀 Quick Start Summary
+
+**Easiest Way to Run:**
+```bash
+# 1. Check your system
+./check-setup.sh
+
+# 2. Run the application (requires Docker)
+./run-quick.sh
+
+# 3. Access at http://localhost:8081
+```
+
+**Alternative if Docker doesn't work:**
+See `SETUP_GUIDE.md` for detailed instructions and troubleshooting.
+
+**View Application Info:**
+Open `index.html` in your browser for a beautiful guide.
