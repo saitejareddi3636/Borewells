@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  servicemaster:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    container_name: servicemaster-app
+    environment:
+      - FLUTTER_WEB_PORT=8081
+    stdin_open: true
+    tty: true
